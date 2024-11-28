@@ -1,0 +1,214 @@
+@import 'normalize.css';
+@import "reset.css";
+@import "../../assets/fonts/font-face.css";
+
+:root {
+    // Font
+    --pri-ff: "Poppins", sans-serif;
+
+    // Color dark
+    --white-cl: #fff;
+    --white-cl-light: #FEFEFE;
+    --pri-cl: #6694F0;
+    --body-bg-cl: #191919;
+    --text-cl: #E8E8E8;
+    --text-cl-gray: #BABABA;
+    --text-cl-gray-dark: #666666;
+    --text-cl-light: #FEFEFE;
+    --pri-bor-cl: #4D4B4B;
+    --card-bg-cl: #212121;
+    --info-cl: #4996fd;
+    --warning-cl: #ffc757;
+    --error-cl: #bf2222;
+    --success-cl: #22bf65;
+
+    // Number
+    --bor-radius: 15px;
+    --ctn-pad-res: 16px;
+}
+
+body {
+    font-family: var(--pri-ff);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    color: var(--text-cl);
+    background-color: var(--body-bg-cl);
+}
+
+button, input, [tabindex], a {
+    color: var(--text-cl);
+}
+
+button, input, [tabindex] {
+    font-family: var(--pri-ff);
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+    height: 4px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: var(--pri-bor-cl);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: var(--header-bor-cl);
+}
+
+// Other class
+.container {
+    padding: 28px 32px;
+    
+    @media only screen and (max-width: 700px) {
+        padding: 0 var(--ctn-pad-res);
+    }
+}
+
+// Button
+.btn {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: var(--bor-radius);
+    cursor: pointer;
+    color: var(--white-cl);
+    background-color: var(--pri-cl);
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+
+    &.cancel {
+        background-color: var(--pri-bor-cl);
+    }
+}
+
+// Noti: Toast, Dialog
+.toast, .dialog {
+    background-color: var(--card-bg-cl);
+    border: 1px solid var(--pri-bor-cl);
+    border-radius: var(--bor-radius);
+}
+
+.toast {
+    padding: 16px;
+    width: 300px;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    transform: translateX(-50%);
+    z-index: 11;
+    font-size: 1.5rem;
+    animation: slideFromTop 0.25s ease forwards;
+
+    &-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    svg, h3 {
+        color: var(--white-cl);
+    }
+
+    h3 {
+        font-weight: 600;
+        margin-top: 1px;
+    }
+
+    p {
+        margin-top: 4px;
+        margin-left: 24px;
+    }
+
+    @keyframes slideFromTop {
+        to {
+            opacity: 1;
+            top: 30px;
+        }
+    }
+
+    &.info svg, &.info h3 {
+        color: var(--info-cl);
+    }
+
+    &.warning svg, &.warning h3 {
+        color: var(--warning-cl);
+    }
+
+    &.error svg, &.error h3 {
+        color: var(--error-cl);
+    }
+
+    &.success svg, &.success h3 {
+        color: var(--success-cl);
+    }
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    animation: showOverlay 0.25s ease forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @keyframes showOverlay {
+        to {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: unset;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+        }
+    }
+
+    .dialog {
+        padding: 20px;
+        min-width: 250px;
+        max-width: 400px;
+        margin: 0 var(--ctn-pad-res);
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 4px;
+        }
+
+        button {
+            --gap: 8px;
+            font-size: 1.4rem;
+            margin-top: 20px;
+            width: calc(50% - calc(var(--gap) / 2));
+            
+            & + button {
+                margin-left: var(--gap);
+            }
+
+            &:last-child {
+                background-color: var(--pri-cl);
+
+                &:hover {
+                    border-color: var(--white-cl);
+                }
+            }
+        }
+    }
+}
