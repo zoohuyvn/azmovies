@@ -1,4 +1,4 @@
-# AZMOVIES
+# AZMovies
 Final project of Web Advanced module and Base project II for movie website of Semester III at VKU.
 
 ## 📍 Features
